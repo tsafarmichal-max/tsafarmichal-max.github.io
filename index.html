@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michal Tsafar — Product Designer</title>
+  <meta name="description" content="Product designer with experience in B2B digital platforms, CRM systems, e-commerce, and data management tools." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0e;
+      --bg-card: #161616;
+      --fg: #f0ede8;
+      --fg-muted: #888;
+      --fg-dim: #444;
+      --accent: #c8f060;
+      --accent-dark: #a8d040;
+      --border: #222;
+      --radius: 12px;
+      --max: 1100px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(14,14,14,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--fg);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--fg-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--fg); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 140px 40px 80px;
+      max-width: var(--max);
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--fg-muted);
+    }
+
+    .hero-sub {
+      font-size: clamp(14px, 2vw, 17px);
+      color: var(--fg-muted);
+      max-width: 480px;
+      margin-top: 28px;
+      margin-bottom: 44px;
+      line-height: 1.7;
+    }
+
+    .hero-images {
+      position: absolute;
+      top: 120px;
+      right: 40px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .hero-img-wrap {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .hero-img-wrap img {
+      display: block;
+      width: 200px;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .hero-img-wrap:nth-child(2) { margin-top: 60px; }
+
+    /* ── BUTTON ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0e0e0e;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--fg);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--fg-muted);
+      transform: translateY(-1px);
+    }
+
+    /* ── SECTION SHARED ── */
+    section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 100px 40px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-label::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 60px;
+      background: var(--fg-dim);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+    }
+
+    .section-body {
+      font-size: 17px;
+      color: var(--fg-muted);
+      max-width: 600px;
+      line-height: 1.75;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    /* ── STORY ── */
+    #story .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    #story .story-portrait {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    #story .story-portrait img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    #story .story-text { padding-top: 12px; }
+
+    /* ── WORK / SERVICES ── */
+    #work .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .service-card:hover {
+      border-color: var(--fg-dim);
+      transform: translateY(-4px);
+    }
+
+    .service-card-img {
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .service-card-img img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .service-card p {
+      font-size: 15px;
+      color: var(--fg-muted);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--fg-muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience .exp-intro {
+      max-width: 680px;
+      margin-bottom: 64px;
+    }
+
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+      padding: 36px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .exp-item:last-child { border-bottom: 1px solid var(--border); }
+
+    .exp-period {
+      font-size: 13px;
+      color: var(--fg-dim);
+      font-weight: 500;
+      padding-top: 4px;
+    }
+
+    .exp-role {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .exp-company {
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .exp-desc {
+      font-size: 15px;
+      color: var(--fg-muted);
+      line-height: 1.7;
+    }
+
+    /* ── CONTACT ── */
+    #contact-section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 100px 40px;
+    }
+
+    .contact-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 80px;
+      text-align: center;
+    }
+
+    .contact-box .section-title { margin-bottom: 16px; }
+
+    .contact-box .section-body {
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: var(--max);
+      margin: 0 auto;
+      font-size: 13px;
+      color: var(--fg-dim);
+    }
+
+    footer a {
+      color: var(--fg-dim);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--fg-muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { gap: 20px; }
+      .hero { padding: 120px 24px 64px; }
+      .hero-images { display: none; }
+      section { padding: 72px 24px; }
+      #contact-section { padding: 72px 24px; }
+      #story .story-grid { grid-template-columns: 1fr; gap: 40px; }
+      #work .services-grid { grid-template-columns: 1fr; }
+      .contact-box { padding: 48px 24px; }
+      .exp-item { grid-template-columns: 1fr; gap: 8px; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero-title { font-size: 42px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">MT</a>
+    <ul class="nav-links">
+      <li><a href="#story">Story</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div style="max-width:var(--max);margin:0 auto;position:relative;">
+    <div class="hero">
+      <p class="hero-eyebrow">Product Designer · Available for work</p>
+      <h1 class="hero-title">
+        Michal<br>
+        <em>Tsafar</em>
+      </h1>
+      <p class="hero-sub">
+        I design through curiosity and attention to detail — making everyday experiences a little better.
+      </p>
+      <div>
+        <a class="btn btn-primary" href="#work">See my work</a>
+      </div>
+
+      <div class="hero-images">
+        <div class="hero-img-wrap">
+          <img
+            src="https://framerusercontent.com/images/Gx1bNR6AiS7dsgMKoGPvYFn1o.png"
+            alt="Design work preview"
+            width="200"
+          />
+        </div>
+        <div class="hero-img-wrap">
+          <img
+            src="https://framerusercontent.com/images/DCrl26yyEa8kV2cqzDPA0qFwZE.png"
+            alt="Design work preview"
+            width="200"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- STORY -->
+  <section id="story">
+    <div class="section-label">Story</div>
+    <div class="story-grid">
+      <div class="story-portrait">
+        <img
+          src="https://framerusercontent.com/images/cIZeONazb4VWGoPPrQnwXxA8.png"
+          alt="Michal Tsafar"
+        />
+      </div>
+      <div class="story-text">
+        <h2 class="section-title">I didn't get into design just to build products.</h2>
+        <p class="section-body" style="margin-bottom:24px;">
+          I got into it because I care about people.
+        </p>
+        <p class="section-body">
+          I have experience designing and improving complex features for B2B digital platforms, including CRM systems, e-commerce products, and data management tools.
+        </p>
+        <p class="section-body" style="margin-top:20px;">
+          I'm naturally collaborative and enjoy working with people. I adapt easily to different working styles, communicate openly, and value creating a positive and productive team dynamic. Curiosity and attention to detail drive how I work, and I'm looking forward to my next opportunity to grow and contribute.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="section-label">Work</div>
+    <h2 class="section-title">Mastering design<br>with every partner</h2>
+    <p class="section-body">
+      All your research, ideation, wireframing, designing to staging and production — in one single place, with me.
+    </p>
+
+    <div class="services-grid">
+
+      <!-- UX Design -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img
+            src="https://framerusercontent.com/images/QuZChUgbCCmOs0v3iTsZiUDvI.jpg"
+            alt="UX Design"
+          />
+        </div>
+        <h3>UX Design</h3>
+        <p>
+          User experience is at the heart of everything I do. Through in-depth research, usability testing, and user-centric design principles, I create intuitive and seamless digital journeys.
+        </p>
+        <div class="tags">
+          <span class="tag">User Research</span>
+          <span class="tag">Usability Testing</span>
+          <span class="tag">Interaction Design</span>
+          <span class="tag">User Flows</span>
+          <span class="tag">Information Architecture</span>
+        </div>
+      </div>
+
+      <!-- Product Design -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img
+            src="https://framerusercontent.com/images/2PGrzEPjMgen0B8gdQ9gZZuLVHU.jpg"
+            alt="Product Design"
+          />
+        </div>
+        <h3>Product Design</h3>
+        <p>
+          Improved, more rapid and intelligent, with tailor-made solutions just for you. A smooth user interaction paired with a considerate layout designed to guide users with clarity.
+        </p>
+        <div class="tags">
+          <span class="tag">Interactive Design</span>
+          <span class="tag">Front-end Dev</span>
+          <span class="tag">CMS</span>
+          <span class="tag">Technical Consulting</span>
+        </div>
+      </div>
+
+      <!-- Design Consultation -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img
+            src="https://framerusercontent.com/images/HX42iuH5K3ozYyKziOEH6jNg.jpg"
+            alt="Design Consultation"
+          />
+        </div>
+        <h3>Design Consultation</h3>
+        <p>
+          Navigating the ever-changing landscape of design can be daunting. I provide guidance and insights you need to take your design strategy to the next level.
+        </p>
+        <div class="tags">
+          <span class="tag">Stakeholder Workshops</span>
+          <span class="tag">Design Thinking</span>
+          <span class="tag">Competitive Analysis</span>
+          <span class="tag">Brand Identity</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Experience</div>
+    <div class="exp-intro">
+      <h2 class="section-title">Where I've worked &amp; what I've built</h2>
+      <p class="section-body">
+        Years of designing across B2B platforms, CRM systems, e-commerce, and data management — always with the end user in mind.
+      </p>
+    </div>
+
+    <!-- Placeholder experience items — update these with your real history -->
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-period">2022 — Present</div>
+        <div>
+          <div class="exp-role">Senior Product Designer</div>
+          <div class="exp-company">Your Company Name</div>
+          <div class="exp-desc">
+            Designing complex features for B2B digital platforms including CRM systems and data management tools. End-to-end ownership from research to production.
+          </div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-period">2020 — 2022</div>
+        <div>
+          <div class="exp-role">Product Designer</div>
+          <div class="exp-company">Your Previous Company</div>
+          <div class="exp-desc">
+            Worked on e-commerce products and UX strategy. Led usability testing and interaction design across multiple product lines.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CONTACT -->
+  <div id="contact-section">
+    <div class="contact-box">
+      <div class="section-label" style="justify-content:center;">Contact</div>
+      <h2 class="section-title">Would love to get in touch and work together</h2>
+      <p class="section-body">
+        Got a project in mind? Let's talk about it.
+      </p>
+      <div style="margin-top:40px;">
+        <a class="btn btn-primary" href="mailto:hello@michaltsafar.com">Say hello</a>
+      </div>
+      <div class="contact-links">
+        <a class="btn btn-outline" href="https://www.linkedin.com/in/michaltsafar/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-outline" href="https://github.com/tsafarmichal-max" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 Michal Tsafar</span>
+    <span>Product Designer</span>
+  </footer>
+
+</body>
+</html>
