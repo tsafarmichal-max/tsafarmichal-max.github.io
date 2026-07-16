@@ -7,32 +7,29 @@
   <meta name="description" content="Product designer with experience in B2B digital platforms, CRM systems, e-commerce, and data management tools." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0e0e0e;
-      --bg-card: #161616;
-      --fg: #f0ede8;
-      --fg-muted: #888;
-      --fg-dim: #444;
-      --accent: #c8f060;
-      --accent-dark: #a8d040;
-      --border: #222;
-      --radius: 12px;
-      --max: 1100px;
+      --cream: #f7f3ec;
+      --cream-dark: #ede8df;
+      --ink: #1a1a1a;
+      --ink-light: #3a3a3a;
+      --muted: #777;
+      --max: 900px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--bg);
-      color: var(--fg);
+      background: var(--cream);
+      color: var(--ink);
       font-family: 'Inter', sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     /* ── NAV ── */
@@ -43,403 +40,387 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 40px;
-      background: rgba(14,14,14,0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      padding: 18px 36px;
+      background: rgba(247,243,236,0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      color: var(--fg);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
       text-decoration: none;
-      letter-spacing: 0.01em;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-logo::before {
+      content: '+';
+      color: #e84a3a;
+      font-size: 16px;
+      font-weight: 400;
     }
 
     .nav-links {
       display: flex;
-      gap: 36px;
+      gap: 32px;
       list-style: none;
     }
 
     .nav-links a {
-      color: var(--fg-muted);
+      color: var(--ink-light);
       text-decoration: none;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 400;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
       transition: color 0.2s;
     }
 
-    .nav-links a:hover { color: var(--fg); }
+    .nav-links a:hover { color: var(--ink); }
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
+      padding-top: 100px;
+      text-align: center;
+      position: relative;
+      min-height: 60vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 140px 40px 80px;
-      max-width: var(--max);
-      margin: 0 auto;
-      position: relative;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
-    .hero-eyebrow {
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 24px;
+    /* Warm glow behind title */
+    .hero-glow {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 260px;
+      background: radial-gradient(ellipse, #f5c842 0%, #f0a830 30%, transparent 70%);
+      opacity: 0.55;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Botanical decorations */
+    .hero-deco {
+      position: absolute;
+      top: 60px;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero-deco-left { left: 0; }
+    .hero-deco-right { right: 0; }
+
+    .hero-deco svg { display: block; }
+
+    /* Small icons scattered */
+    .hero-icon {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      font-size: 20px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 60px 40px 40px;
     }
 
     .hero-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(52px, 8vw, 96px);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
-    }
-
-    .hero-title em {
-      font-style: italic;
+      font-size: clamp(42px, 7vw, 72px);
       font-weight: 400;
-      color: var(--fg-muted);
+      line-height: 1.12;
+      color: var(--ink);
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
     }
 
     .hero-sub {
-      font-size: clamp(14px, 2vw, 17px);
-      color: var(--fg-muted);
-      max-width: 480px;
-      margin-top: 28px;
-      margin-bottom: 44px;
-      line-height: 1.7;
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 360px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
     }
 
-    .hero-images {
-      position: absolute;
-      top: 120px;
-      right: 40px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
-
-    .hero-img-wrap {
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .hero-img-wrap img {
-      display: block;
-      width: 200px;
-      height: auto;
-      object-fit: cover;
-    }
-
-    .hero-img-wrap:nth-child(2) { margin-top: 60px; }
-
-    /* ── BUTTON ── */
-    .btn {
+    .btn-dark {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 14px 28px;
+      background: var(--ink);
+      color: #fff;
+      border: none;
       border-radius: 999px;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
+      padding: 12px 24px;
+      font-size: 13px;
+      font-weight: 500;
       text-decoration: none;
-      transition: all 0.2s;
       cursor: pointer;
-      border: none;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.01em;
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #0e0e0e;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-dark);
+    .btn-dark:hover {
+      background: #333;
       transform: translateY(-1px);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--fg);
-      border: 1px solid var(--border);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--fg-muted);
-      transform: translateY(-1px);
-    }
-
-    /* ── SECTION SHARED ── */
-    section {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 100px 40px;
-    }
-
-    .section-label {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--fg-dim);
-      margin-bottom: 48px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .section-label::after {
-      content: '';
-      display: block;
-      height: 1px;
-      width: 60px;
-      background: var(--fg-dim);
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 5vw, 52px);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.01em;
-      margin-bottom: 24px;
-    }
-
-    .section-body {
-      font-size: 17px;
-      color: var(--fg-muted);
-      max-width: 600px;
-      line-height: 1.75;
-    }
-
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      max-width: var(--max);
-      margin: 0 auto;
     }
 
     /* ── STORY ── */
-    #story .story-grid {
+    .story {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px 40px 100px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      grid-template-columns: 1fr 60px;
+      gap: 0;
       align-items: start;
     }
 
-    #story .story-portrait {
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border);
+    .story-text p {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--ink-light);
+      margin-bottom: 24px;
+      max-width: 520px;
     }
 
-    #story .story-portrait img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
+    .story-text p:last-child { margin-bottom: 0; }
+
+    .story-icon {
+      padding-top: 8px;
+      text-align: center;
+      font-size: 28px;
+      opacity: 0.7;
     }
 
-    #story .story-text { padding-top: 12px; }
+    /* ── SERVICE ROWS ── */
+    .services {
+      padding: 20px 0 40px;
+    }
 
-    /* ── WORK / SERVICES ── */
-    #work .services-grid {
+    .service-row {
+      max-width: 960px;
+      margin: 0 auto 100px;
+      padding: 0 40px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 60px;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
     }
 
-    .service-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px 28px 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      transition: border-color 0.2s, transform 0.2s;
-    }
+    .service-row.reverse { direction: rtl; }
+    .service-row.reverse > * { direction: ltr; }
 
-    .service-card:hover {
-      border-color: var(--fg-dim);
-      transform: translateY(-4px);
-    }
-
-    .service-card-img {
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 8px;
-    }
-
-    .service-card-img img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .service-card h3 {
+    .service-text h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 700;
+      font-size: 26px;
+      font-weight: 400;
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+
+    .service-text p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 24px;
+      max-width: 340px;
+    }
+
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid #ccc;
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .btn-pill:hover {
+      border-color: var(--ink);
+      transform: translateY(-1px);
+    }
+
+    .btn-pill .arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background: var(--ink);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 11px;
+    }
+
+    /* Screenshot card */
+    .service-card {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .service-card-bg {
+      padding: 24px 24px 0;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .service-card-bg.green  { background: #c8e8c8; }
+    .service-card-bg.purple { background: #c8b8e8; }
+    .service-card-bg.teal   { background: #b8d8d8; }
+
+    .service-card-bg img {
+      display: block;
+      width: 100%;
+      border-radius: 12px 12px 0 0;
+      object-fit: cover;
+    }
+
+    .service-card-tags {
+      background: #fff;
+      padding: 16px 20px;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .tag-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 13px;
+      color: var(--ink-light);
+    }
+
+    .tag-row:last-child { border-bottom: none; }
+
+    .tag-icon {
+      width: 20px;
+      height: 20px;
+      background: #eee;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER CTA ── */
+    .footer-cta-wrap {
+      padding: 20px 40px 60px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .footer-cta {
+      background: #1e2a24;
+      border-radius: 40px;
+      padding: 80px 40px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .footer-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 400;
+      margin-bottom: 28px;
       line-height: 1.2;
     }
 
-    .service-card p {
-      font-size: 15px;
-      color: var(--fg-muted);
-      line-height: 1.7;
-      flex: 1;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
+    .btn-pill-light {
+      display: inline-flex;
+      align-items: center;
       gap: 8px;
-      margin-top: 12px;
-    }
-
-    .tag {
-      font-size: 12px;
-      font-weight: 500;
-      padding: 5px 12px;
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.35);
       border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--fg-muted);
-      letter-spacing: 0.02em;
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s;
     }
 
-    /* ── EXPERIENCE ── */
-    #experience .exp-intro {
-      max-width: 680px;
-      margin-bottom: 64px;
+    .btn-pill-light:hover {
+      border-color: rgba(255,255,255,0.8);
+      transform: translateY(-1px);
     }
 
-    .exp-list {
+    .btn-pill-light .arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background: #fff;
+      border-radius: 50%;
+      color: #1e2a24;
+      font-size: 11px;
+    }
+
+    /* ── FOOTER NAV ── */
+    footer {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 40px 40px;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: 0;
     }
 
-    .exp-item {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 40px;
-      padding: 36px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .exp-item:last-child { border-bottom: 1px solid var(--border); }
-
-    .exp-period {
-      font-size: 13px;
-      color: var(--fg-dim);
-      font-weight: 500;
-      padding-top: 4px;
-    }
-
-    .exp-role {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .exp-company {
-      font-size: 14px;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-
-    .exp-desc {
-      font-size: 15px;
-      color: var(--fg-muted);
-      line-height: 1.7;
-    }
-
-    /* ── CONTACT ── */
-    #contact-section {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 100px 40px;
-    }
-
-    .contact-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 80px;
-      text-align: center;
-    }
-
-    .contact-box .section-title { margin-bottom: 16px; }
-
-    .contact-box .section-body {
-      margin: 0 auto 40px;
-      text-align: center;
-    }
-
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 24px;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 40px;
+    .footer-link {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      max-width: var(--max);
-      margin: 0 auto;
-      font-size: 13px;
-      color: var(--fg-dim);
-    }
-
-    footer a {
-      color: var(--fg-dim);
+      gap: 10px;
+      color: var(--ink-light);
       text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      padding: 10px 0;
+      flex: 1;
+      border-top: 1px solid #ccc;
+      transition: color 0.2s;
     }
 
-    footer a:hover { color: var(--fg-muted); }
+    .footer-link:hover { color: var(--ink); }
+
+    .footer-link .f-arrow {
+      margin-left: auto;
+      font-size: 14px;
+      color: var(--muted);
+    }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 16px 24px; }
-      .nav-links { gap: 20px; }
-      .hero { padding: 120px 24px 64px; }
-      .hero-images { display: none; }
-      section { padding: 72px 24px; }
-      #contact-section { padding: 72px 24px; }
-      #story .story-grid { grid-template-columns: 1fr; gap: 40px; }
-      #work .services-grid { grid-template-columns: 1fr; }
-      .contact-box { padding: 48px 24px; }
-      .exp-item { grid-template-columns: 1fr; gap: 8px; }
-    }
-
-    @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .hero-title { font-size: 42px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * { transition: none !important; }
+    @media (max-width: 700px) {
+      .service-row, .service-row.reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+      }
+      .story { grid-template-columns: 1fr; }
+      .story-icon { display: none; }
+      .hero-deco { display: none; }
+      nav { padding: 16px 20px; }
+      .nav-links { gap: 16px; }
     }
   </style>
 </head>
@@ -447,7 +428,7 @@
 
   <!-- NAV -->
   <nav>
-    <a class="nav-logo" href="#">MT</a>
+    <a class="nav-logo" href="#">Prologue</a>
     <ul class="nav-links">
       <li><a href="#story">Story</a></li>
       <li><a href="#work">Work</a></li>
@@ -456,203 +437,164 @@
   </nav>
 
   <!-- HERO -->
-  <div style="max-width:var(--max);margin:0 auto;position:relative;">
-    <div class="hero">
-      <p class="hero-eyebrow">Product Designer · Available for work</p>
-      <h1 class="hero-title">
-        Michal<br>
-        <em>Tsafar</em>
-      </h1>
-      <p class="hero-sub">
-        I design through curiosity and attention to detail — making everyday experiences a little better.
-      </p>
-      <div>
-        <a class="btn btn-primary" href="#work">See my work</a>
-      </div>
+  <section class="hero">
+    <div class="hero-glow"></div>
 
-      <div class="hero-images">
-        <div class="hero-img-wrap">
-          <img
-            src="https://framerusercontent.com/images/Gx1bNR6AiS7dsgMKoGPvYFn1o.png"
-            alt="Design work preview"
-            width="200"
-          />
-        </div>
-        <div class="hero-img-wrap">
-          <img
-            src="https://framerusercontent.com/images/DCrl26yyEa8kV2cqzDPA0qFwZE.png"
-            alt="Design work preview"
-            width="200"
-          />
-        </div>
-      </div>
+    <!-- Left botanical -->
+    <div class="hero-deco hero-deco-left">
+      <svg width="160" height="220" viewBox="0 0 160 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- stem -->
+        <path d="M60 220 Q55 160 70 100 Q80 60 60 20" stroke="#2a1a0a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- big pink flower -->
+        <ellipse cx="52" cy="38" rx="18" ry="22" fill="#e8607a" transform="rotate(-20 52 38)" opacity="0.9"/>
+        <ellipse cx="72" cy="28" rx="15" ry="20" fill="#e8607a" transform="rotate(10 72 28)" opacity="0.85"/>
+        <ellipse cx="62" cy="20" rx="14" ry="18" fill="#d04060" transform="rotate(-5 62 20)" opacity="0.8"/>
+        <ellipse cx="48" cy="55" rx="16" ry="20" fill="#e86080" transform="rotate(-30 48 55)" opacity="0.75"/>
+        <circle cx="62" cy="35" r="8" fill="#f5b820"/>
+        <!-- leaf -->
+        <path d="M75 90 Q100 70 90 100 Q80 110 75 90Z" fill="#4a7a3a" opacity="0.85"/>
+        <path d="M65 120 Q40 105 55 130 Q65 140 65 120Z" fill="#5a8a45" opacity="0.8"/>
+        <!-- orange flower top right area -->
+        <ellipse cx="115" cy="70" rx="12" ry="15" fill="#f07830" transform="rotate(15 115 70)" opacity="0.9"/>
+        <ellipse cx="128" cy="60" rx="10" ry="14" fill="#f09040" transform="rotate(35 128 60)" opacity="0.85"/>
+        <circle cx="120" cy="65" r="5" fill="#f5c820"/>
+        <!-- stem to orange -->
+        <path d="M70 80 Q90 75 118 67" stroke="#2a1a0a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- bee near orange -->
+        <ellipse cx="100" cy="50" rx="7" ry="4.5" fill="#f5c820"/>
+        <path d="M93 50 Q96 46 100 50" stroke="#2a1a0a" stroke-width="1" fill="none"/>
+        <path d="M100 50 Q104 46 107 50" stroke="#2a1a0a" stroke-width="1" fill="none"/>
+        <line x1="95" y1="48" x2="95" y2="52" stroke="#2a1a0a" stroke-width="0.8"/>
+        <line x1="98" y1="47" x2="98" y2="53" stroke="#2a1a0a" stroke-width="0.8"/>
+        <line x1="101" y1="47" x2="101" y2="53" stroke="#2a1a0a" stroke-width="0.8"/>
+      </svg>
     </div>
-  </div>
 
-  <hr class="divider" />
+    <!-- Right botanical -->
+    <div class="hero-deco hero-deco-right">
+      <svg width="160" height="200" viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- stem -->
+        <path d="M100 200 Q105 140 90 90 Q80 55 100 15" stroke="#2a1a0a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- orange/yellow flower -->
+        <ellipse cx="108" cy="32" rx="17" ry="21" fill="#f07830" transform="rotate(20 108 32)" opacity="0.9"/>
+        <ellipse cx="90" cy="22" rx="14" ry="19" fill="#f09040" transform="rotate(-15 90 22)" opacity="0.85"/>
+        <ellipse cx="100" cy="16" rx="13" ry="17" fill="#e86020" transform="rotate(5 100 16)" opacity="0.8"/>
+        <circle cx="100" cy="28" r="7" fill="#f5c820"/>
+        <!-- leaf -->
+        <path d="M88 85 Q65 68 75 95 Q82 108 88 85Z" fill="#4a7a3a" opacity="0.85"/>
+        <path d="M95 115 Q118 100 106 128 Q97 140 95 115Z" fill="#5a8a45" opacity="0.8"/>
+        <!-- small pink cluster top left -->
+        <ellipse cx="42" cy="55" rx="11" ry="14" fill="#e8607a" transform="rotate(-25 42 55)" opacity="0.85"/>
+        <ellipse cx="32" cy="68" rx="9" ry="12" fill="#d04060" transform="rotate(-10 32 68)" opacity="0.8"/>
+        <circle cx="38" cy="62" r="5" fill="#f5b820"/>
+        <!-- stem to pink -->
+        <path d="M92 78 Q72 72 40 63" stroke="#2a1a0a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- bee -->
+        <ellipse cx="60" cy="110" rx="6" ry="4" fill="#f5c820"/>
+        <path d="M54 110 Q57 106 60 110" stroke="#2a1a0a" stroke-width="1" fill="none"/>
+        <path d="M60 110 Q63 106 66 110" stroke="#2a1a0a" stroke-width="1" fill="none"/>
+        <line x1="56" y1="108" x2="56" y2="112" stroke="#2a1a0a" stroke-width="0.8"/>
+        <line x1="59" y1="107" x2="59" y2="113" stroke="#2a1a0a" stroke-width="0.8"/>
+        <line x1="62" y1="107" x2="62" y2="113" stroke="#2a1a0a" stroke-width="0.8"/>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <h1 class="hero-title">Michal Tsafar<br>Product designer</h1>
+      <p class="hero-sub">I design through curiosity and attention to detail making everyday experiences a little better.</p>
+      <a class="btn-dark" href="#work">See my work</a>
+    </div>
+  </section>
 
   <!-- STORY -->
-  <section id="story">
-    <div class="section-label">Story</div>
-    <div class="story-grid">
-      <div class="story-portrait">
-        <img
-          src="https://framerusercontent.com/images/cIZeONazb4VWGoPPrQnwXxA8.png"
-          alt="Michal Tsafar"
-        />
-      </div>
+  <section id="story" style="max-width:var(--max);margin:0 auto;padding:80px 40px 100px;">
+    <div class="story">
       <div class="story-text">
-        <h2 class="section-title">I didn't get into design just to build products.</h2>
-        <p class="section-body" style="margin-bottom:24px;">
-          I got into it because I care about people.
-        </p>
-        <p class="section-body">
-          I have experience designing and improving complex features for B2B digital platforms, including CRM systems, e-commerce products, and data management tools.
-        </p>
-        <p class="section-body" style="margin-top:20px;">
-          I'm naturally collaborative and enjoy working with people. I adapt easily to different working styles, communicate openly, and value creating a positive and productive team dynamic. Curiosity and attention to detail drive how I work, and I'm looking forward to my next opportunity to grow and contribute.
-        </p>
+        <p>I didn't get into design just to build products. I got into it because I care about people. I have experience designing and improving complex features for B2B digital platforms, including CRM systems, e-commerce products, and data management tools.</p>
+        <p>I'm naturally collaborative and enjoy working with people. I adapt easily to different working styles, communicate openly, and value creating a positive and productive team dynamic. Curiosity and attention to detail drive how I work, and I'm looking forward to my next opportunity to grow and contribute.</p>
       </div>
+      <div class="story-icon">🔧</div>
     </div>
   </section>
 
-  <hr class="divider" />
+  <!-- SERVICES -->
+  <div id="work" class="services">
 
-  <!-- WORK -->
-  <section id="work">
-    <div class="section-label">Work</div>
-    <h2 class="section-title">Mastering design<br>with every partner</h2>
-    <p class="section-body">
-      All your research, ideation, wireframing, designing to staging and production — in one single place, with me.
-    </p>
-
-    <div class="services-grid">
-
-      <!-- UX Design -->
+    <!-- UX Design — text left, card right -->
+    <div class="service-row">
+      <div class="service-text">
+        <h2>UX Design</h2>
+        <p>User experience is at the heart of everything we do. Our team of experienced UX designers is dedicated to engineering digital experiences that prioritize user satisfaction and loyalty. Through in-depth research, usability testing, and user-centric design principles, we create intuitive and seamless digital journeys.</p>
+        <a class="btn-pill" href="#">I need this <span class="arrow">→</span></a>
+      </div>
       <div class="service-card">
-        <div class="service-card-img">
-          <img
-            src="https://framerusercontent.com/images/QuZChUgbCCmOs0v3iTsZiUDvI.jpg"
-            alt="UX Design"
-          />
+        <div class="service-card-bg green">
+          <img src="https://framerusercontent.com/images/QuZChUgbCCmOs0v3iTsZiUDvI.jpg" alt="UX Design work" />
         </div>
-        <h3>UX Design</h3>
-        <p>
-          User experience is at the heart of everything I do. Through in-depth research, usability testing, and user-centric design principles, I create intuitive and seamless digital journeys.
-        </p>
-        <div class="tags">
-          <span class="tag">User Research</span>
-          <span class="tag">Usability Testing</span>
-          <span class="tag">Interaction Design</span>
-          <span class="tag">User Flows</span>
-          <span class="tag">Information Architecture</span>
-        </div>
-      </div>
-
-      <!-- Product Design -->
-      <div class="service-card">
-        <div class="service-card-img">
-          <img
-            src="https://framerusercontent.com/images/2PGrzEPjMgen0B8gdQ9gZZuLVHU.jpg"
-            alt="Product Design"
-          />
-        </div>
-        <h3>Product Design</h3>
-        <p>
-          Improved, more rapid and intelligent, with tailor-made solutions just for you. A smooth user interaction paired with a considerate layout designed to guide users with clarity.
-        </p>
-        <div class="tags">
-          <span class="tag">Interactive Design</span>
-          <span class="tag">Front-end Dev</span>
-          <span class="tag">CMS</span>
-          <span class="tag">Technical Consulting</span>
-        </div>
-      </div>
-
-      <!-- Design Consultation -->
-      <div class="service-card">
-        <div class="service-card-img">
-          <img
-            src="https://framerusercontent.com/images/HX42iuH5K3ozYyKziOEH6jNg.jpg"
-            alt="Design Consultation"
-          />
-        </div>
-        <h3>Design Consultation</h3>
-        <p>
-          Navigating the ever-changing landscape of design can be daunting. I provide guidance and insights you need to take your design strategy to the next level.
-        </p>
-        <div class="tags">
-          <span class="tag">Stakeholder Workshops</span>
-          <span class="tag">Design Thinking</span>
-          <span class="tag">Competitive Analysis</span>
-          <span class="tag">Brand Identity</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <hr class="divider" />
-
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="section-label">Experience</div>
-    <div class="exp-intro">
-      <h2 class="section-title">Where I've worked &amp; what I've built</h2>
-      <p class="section-body">
-        Years of designing across B2B platforms, CRM systems, e-commerce, and data management — always with the end user in mind.
-      </p>
-    </div>
-
-    <!-- Placeholder experience items — update these with your real history -->
-    <div class="exp-list">
-      <div class="exp-item">
-        <div class="exp-period">2022 — Present</div>
-        <div>
-          <div class="exp-role">Senior Product Designer</div>
-          <div class="exp-company">Your Company Name</div>
-          <div class="exp-desc">
-            Designing complex features for B2B digital platforms including CRM systems and data management tools. End-to-end ownership from research to production.
-          </div>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-period">2020 — 2022</div>
-        <div>
-          <div class="exp-role">Product Designer</div>
-          <div class="exp-company">Your Previous Company</div>
-          <div class="exp-desc">
-            Worked on e-commerce products and UX strategy. Led usability testing and interaction design across multiple product lines.
-          </div>
+        <div class="service-card-tags">
+          <div class="tag-row"><span class="tag-icon">📋</span> User Research Methods</div>
+          <div class="tag-row"><span class="tag-icon">✅</span> Usability Testing</div>
+          <div class="tag-row"><span class="tag-icon">🎯</span> Interaction Design</div>
         </div>
       </div>
     </div>
-  </section>
 
-  <hr class="divider" />
+    <!-- Product Design — card left, text right -->
+    <div class="service-row reverse">
+      <div class="service-text">
+        <h2>Product Design</h2>
+        <p>Improved, more rapid and intelligent, with tailor-made online solutions just for you. A smooth user interaction, paired with a considerate layout designed to guide users with clarity, is what differentiates this website from others.</p>
+        <a class="btn-pill" href="#">I need this <span class="arrow">→</span></a>
+      </div>
+      <div class="service-card">
+        <div class="service-card-bg purple">
+          <img src="https://framerusercontent.com/images/2PGrzEPjMgen0B8gdQ9gZZuLVHU.jpg" alt="Product Design work" />
+        </div>
+        <div class="service-card-tags">
+          <div class="tag-row"><span class="tag-icon">⚡</span> Interactive design</div>
+          <div class="tag-row"><span class="tag-icon">💻</span> Front-end development</div>
+          <div class="tag-row"><span class="tag-icon">🛠</span> Technical consulting</div>
+          <div class="tag-row"><span class="tag-icon">🔧</span> Support &amp; maintenance</div>
+        </div>
+      </div>
+    </div>
 
-  <!-- CONTACT -->
-  <div id="contact-section">
-    <div class="contact-box">
-      <div class="section-label" style="justify-content:center;">Contact</div>
-      <h2 class="section-title">Would love to get in touch and work together</h2>
-      <p class="section-body">
-        Got a project in mind? Let's talk about it.
-      </p>
-      <div style="margin-top:40px;">
-        <a class="btn btn-primary" href="mailto:hello@michaltsafar.com">Say hello</a>
+    <!-- Design Consultation — text left, card right -->
+    <div class="service-row">
+      <div class="service-text">
+        <h2>Design Consultation</h2>
+        <p>Navigating the ever-changing landscape of design can be daunting, but with our design consultation services, you don't have to do it alone. Our team of experts is here to provide you with the guidance and insights you need to take your design strategy to the next level.</p>
+        <a class="btn-pill" href="#">I need this <span class="arrow">→</span></a>
       </div>
-      <div class="contact-links">
-        <a class="btn btn-outline" href="https://www.linkedin.com/in/michaltsafar/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn btn-outline" href="https://github.com/tsafarmichal-max" target="_blank" rel="noopener">GitHub</a>
+      <div class="service-card">
+        <div class="service-card-bg teal">
+          <img src="https://framerusercontent.com/images/HX42iuH5K3ozYyKziOEH6jNg.jpg" alt="Design Consultation work" />
+        </div>
+        <div class="service-card-tags">
+          <div class="tag-row"><span class="tag-icon">👥</span> Stakeholder Workshops</div>
+          <div class="tag-row"><span class="tag-icon">🏷</span> Brand Identity Development</div>
+        </div>
       </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER CTA -->
+  <div class="footer-cta-wrap">
+    <div class="footer-cta">
+      <h2>Would love to get in touch<br>and work together</h2>
+      <a class="btn-pill-light" href="mailto:hello@michaltsafar.com">Say hello <span class="arrow">→</span></a>
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- FOOTER LINKS -->
   <footer>
-    <span>© 2026 Michal Tsafar</span>
-    <span>Product Designer</span>
+    <a class="footer-link" href="https://www.linkedin.com/in/michaltsafar/" target="_blank" rel="noopener">
+      LinkedIn <span class="f-arrow">→</span>
+    </a>
+    <a class="footer-link" href="https://twitter.com/michaltsafar" target="_blank" rel="noopener" style="border-left:1px solid #ccc; padding-left:24px; margin-left:24px;">
+      𝕏 Twitter <span class="f-arrow">→</span>
+    </a>
   </footer>
 
 </body>
