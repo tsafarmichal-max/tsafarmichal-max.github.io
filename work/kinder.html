@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kinder — Michal Tsafar</title>
+  <meta name="description" content="Kinder connects kindergarten managers, staff, and parents in one shared system for attendance, daily changes, staff updates, and parent communication." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f9f8f6;
+      --white:     #ffffff;
+      --ink:       #1a1918;
+      --ink-mid:   #4a4845;
+      --ink-light: #888480;
+      --accent:    #e8f0d8;       /* soft sage — kindergarten, calm, organised */
+      --accent-fg: #3a5c2a;
+      --rule:      #e4e2de;
+      --lavender:  #e8e6f4;       /* used for product card bg on product section */
+      --teal-soft: #e2f0ec;
+      --max:       1080px;
+      --col:       680px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(249,248,246,0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--ink-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--ink); }
+    .nav-back-arrow { font-size: 16px; }
+
+    .nav-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-mid);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 140px 48px 80px;
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 60px;
+      align-items: end;
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(52px, 7vw, 88px);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--ink-mid);
+      max-width: 500px;
+      margin-bottom: 12px;
+    }
+
+    .hero-note {
+      font-size: 13px;
+      color: var(--ink-light);
+      font-style: italic;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-rows: repeat(4, auto);
+      gap: 20px;
+      padding-bottom: 8px;
+    }
+
+    .meta-item { }
+
+    .meta-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 4px;
+    }
+
+    .meta-value {
+      font-size: 13px;
+      color: var(--ink-mid);
+      line-height: 1.4;
+    }
+
+    /* ── DIVIDER ── */
+    .rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    /* ── SECTION SHARED ── */
+    .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-fg);
+      background: var(--accent);
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 20px;
+      max-width: var(--col);
+    }
+
+    .section-body {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--ink-mid);
+      max-width: var(--col);
+      margin-bottom: 48px;
+    }
+
+    .context-note {
+      font-size: 12px;
+      color: var(--ink-light);
+      margin-bottom: 40px;
+    }
+
+    /* ── RESEARCH FINDINGS ── */
+    .findings {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: var(--col);
+    }
+
+    .finding {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 16px;
+      padding: 24px 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .finding:last-child { border-bottom: 1px solid var(--rule); }
+
+    .finding-num {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-light);
+      padding-top: 3px;
+    }
+
+    .finding-body h4 {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .finding-body p {
+      font-size: 14px;
+      color: var(--ink-mid);
+      line-height: 1.65;
+      margin-bottom: 8px;
+    }
+
+    .finding-led {
+      font-size: 12px;
+      color: var(--accent-fg);
+      font-weight: 500;
+    }
+
+    /* ── INSIGHT CLUSTER (lead teacher complexity) ── */
+    .insight-cluster {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 40px;
+    }
+
+    .insight-tag {
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--rule);
+      color: var(--ink-mid);
+      background: var(--white);
+    }
+
+    .insight-tag.highlighted {
+      background: var(--ink);
+      color: var(--white);
+      border-color: var(--ink);
+    }
+
+    /* ── FEATURE SECTIONS ── */
+    .feature {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+
+    .feature-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 56px;
+      align-items: start;
+    }
+
+    .feature-header .section-title { margin-bottom: 12px; }
+    .feature-header .section-body { margin-bottom: 0; }
+
+    /* Mock device cards */
+    .mock-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .mock-grid.two-col { grid-template-columns: 1fr 1fr; }
+    .mock-grid.three-col { grid-template-columns: repeat(3, 1fr); }
+    .mock-grid.asymmetric { grid-template-columns: 2fr 1fr; }
+    .mock-grid.asymmetric-r { grid-template-columns: 1fr 2fr; }
+
+    .mock-card {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      background: var(--white);
+    }
+
+    .mock-card-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mock-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .mock-dot.red   { background: #ff6058; }
+    .mock-dot.yel   { background: #ffbd2e; }
+    .mock-dot.grn   { background: #27c93f; }
+
+    .mock-title {
+      font-size: 11px;
+      color: var(--ink-light);
+      margin-left: 8px;
+    }
+
+    .mock-body {
+      padding: 20px;
+      min-height: 120px;
+    }
+
+    /* Phone mock */
+    .phone-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .phone {
+      width: 180px;
+      background: #1a1a1a;
+      border-radius: 32px;
+      padding: 12px;
+      position: relative;
+    }
+
+    .phone-screen {
+      background: var(--white);
+      border-radius: 22px;
+      overflow: hidden;
+      min-height: 300px;
+    }
+
+    .phone-status {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 12px 4px;
+      font-size: 10px;
+      color: var(--ink-light);
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .phone-content { padding: 12px; }
+
+    /* notification card inside phone */
+    .notif-card {
+      background: #f5f5f5;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 8px;
+    }
+
+    .notif-app {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--ink-light);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .notif-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
+    .notif-body { font-size: 10px; color: var(--ink-mid); line-height: 1.4; }
+
+    .notif-actions {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .notif-btn {
+      flex: 1;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 5px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      background: var(--white);
+      color: var(--ink);
+    }
+
+    .notif-btn.primary { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+    /* desktop mock rows */
+    .desktop-mock {
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--rule);
+      overflow: hidden;
+    }
+
+    .desktop-topbar {
+      background: #f2f2f0;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .desktop-content {
+      display: flex;
+      min-height: 200px;
+    }
+
+    .desktop-sidebar {
+      width: 180px;
+      border-right: 1px solid var(--rule);
+      padding: 12px;
+      flex-shrink: 0;
+    }
+
+    .sidebar-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-light);
+      margin-bottom: 8px;
+      padding: 0 4px;
+    }
+
+    .sidebar-item {
+      padding: 6px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--ink-mid);
+      margin-bottom: 2px;
+      cursor: pointer;
+    }
+
+    .sidebar-item.active {
+      background: var(--accent);
+      color: var(--accent-fg);
+      font-weight: 500;
+    }
+
+    .desktop-main { flex: 1; padding: 16px; overflow: hidden; }
+
+    /* update card in staff updates */
+    .update-card {
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      background: var(--white);
+    }
+
+    .update-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .cat-badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    .cat-security { background: #fde8e8; color: #c0392b; }
+    .cat-health   { background: #e8f4fd; color: #1a6fa0; }
+    .cat-schedule { background: var(--lavender); color: #4a3a8a; }
+    .cat-general  { background: #f0f0f0; color: #555; }
+
+    .priority-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #e74c3c;
+      flex-shrink: 0;
+    }
+
+    .update-text { font-size: 12px; color: var(--ink-mid); line-height: 1.5; }
+
+    .update-meta {
+      font-size: 10px;
+      color: var(--ink-light);
+      margin-top: 6px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .mention { color: var(--accent-fg); font-weight: 500; }
+
+    /* automations */
+    .automation-card {
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 10px;
+      background: var(--white);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .auto-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .auto-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .auto-desc { font-size: 12px; color: var(--ink-light); line-height: 1.4; }
+
+    .auto-toggle {
+      margin-left: auto;
+      width: 32px; height: 18px;
+      border-radius: 999px;
+      background: var(--accent-fg);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .auto-toggle::after {
+      content: '';
+      position: absolute;
+      right: 3px; top: 3px;
+      width: 12px; height: 12px;
+      background: white;
+      border-radius: 50%;
+    }
+
+    /* ── HOW IT WORKS CALLOUTS ── */
+    .callouts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .callout {
+      padding: 24px;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      background: var(--white);
+    }
+
+    .callout-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink-light);
+      margin-bottom: 10px;
+    }
+
+    .callout-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .callout-desc {
+      font-size: 13px;
+      color: var(--ink-mid);
+      line-height: 1.55;
+    }
+
+    /* ── NEXT PROJECT ── */
+    .next-project {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--rule);
+    }
+
+    .next-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 8px;
+    }
+
+    .next-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      color: var(--ink);
+    }
+
+    .btn-next {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--ink);
+      color: var(--white);
+      border-radius: 999px;
+      padding: 12px 24px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn-next:hover { background: #333; transform: translateY(-1px); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding: 120px 24px 60px; }
+      .hero-meta { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
+      .feature-header { grid-template-columns: 1fr; gap: 24px; }
+      .mock-grid.two-col,
+      .mock-grid.three-col,
+      .mock-grid.asymmetric,
+      .mock-grid.asymmetric-r { grid-template-columns: 1fr; }
+      .callouts { grid-template-columns: 1fr; }
+      .section, .feature { padding: 60px 24px; }
+      .nav { padding: 16px 24px; }
+      .next-project { flex-direction: column; gap: 24px; align-items: flex-start; padding: 60px 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a class="nav-back" href="../index.html">
+      <span class="nav-back-arrow">←</span> All projects
+    </a>
+    <span class="nav-name">Michal Tsafar</span>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div>
+      <p class="hero-eyebrow">Case Study</p>
+      <h1 class="hero-title">Kinder</h1>
+      <p class="hero-desc">One kindergarten. Three perspectives.<br>One coordinated system.</p>
+      <p class="hero-desc" style="font-size:15px; margin-top:12px;">Kinder connects kindergarten managers, staff, and parents in one shared system for attendance, daily changes, staff updates, and parent communication. Each role sees what changed and what needs action.</p>
+      <p class="hero-note">Each role sees what changed and what needs action.</p>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">Sole Product Designer</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Project</div>
+        <div class="meta-value">Independent Product Concept</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Scope</div>
+        <div class="meta-value">Research, Product Definition, UX &amp; UI Design</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Status</div>
+        <div class="meta-value">Concept, Not Launched</div>
+      </div>
+    </div>
+  </header>
+
+  <hr class="rule" />
+
+  <!-- RESEARCH -->
+  <section class="section">
+    <span class="section-eyebrow">Research</span>
+    <h2 class="section-title">What I found inside one kindergarten.</h2>
+    <p class="section-body">I visited a municipal kindergarten and interviewed the lead teacher and an assistant teacher to understand how information moved through the day.</p>
+    <p class="context-note">1 kindergarten · 2 staff interviews · On-site observation</p>
+
+    <div class="findings">
+      <div class="finding">
+        <div class="finding-num">01</div>
+        <div class="finding-body">
+          <h4>Work updates mixed with greetings and stickers.</h4>
+          <p>Dedicated WhatsApp groups existed, but operational information still shared the same chat with social messages — no clear categories or priority.</p>
+          <p class="finding-led">→ Led to Staff Updates</p>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-num">02</div>
+        <div class="finding-body">
+          <h4>Key daily information still lived on paper.</h4>
+          <p>Attendance, schedules, pickup forms, notes, and reference information were spread across sheets, boards, and binders.</p>
+          <p class="finding-led">→ Led to Attendance &amp; Daily Exceptions</p>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-num">03</div>
+        <div class="finding-body">
+          <h4>Most coordination ran through the lead teacher.</h4>
+          <p>Staff, parents, safety, supplies, events, schedules, and reporting all required her attention.</p>
+          <p class="finding-led">→ Led to Manager Overview &amp; Time Savers</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-cluster">
+      <span class="insight-tag highlighted">Lead teacher</span>
+      <span class="insight-tag">Staff</span>
+      <span class="insight-tag">Parents</span>
+      <span class="insight-tag">Safety</span>
+      <span class="insight-tag">Schedules</span>
+      <span class="insight-tag">Supplies</span>
+      <span class="insight-tag">Events</span>
+      <span class="insight-tag">Reporting</span>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- DAILY EXCEPTIONS -->
+  <section class="feature">
+    <div class="feature-header">
+      <div>
+        <span class="section-eyebrow">Daily Exceptions</span>
+        <h2 class="section-title">Report once. See it where it matters.</h2>
+      </div>
+      <p class="section-body" style="padding-top:60px;">Staff see absences and pickup changes directly in each child's attendance record, while managers see the same updates in the relevant daily view.</p>
+    </div>
+
+    <!-- arrival check-in flow -->
+    <div class="mock-grid asymmetric" style="margin-bottom:16px;">
+      <div style="background:var(--teal-soft); border-radius:20px; padding:32px; display:flex; align-items:center; justify-content:center;">
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-status">
+                <span>9:16</span><span>●●●</span>
+              </div>
+              <div class="phone-content">
+                <div class="notif-card">
+                  <div class="notif-app">Kinder</div>
+                  <div class="notif-title">Did you drop Noa off?</div>
+                  <div class="notif-body">We haven't received a drop-off update yet.</div>
+                  <div class="notif-actions">
+                    <div class="notif-btn primary">Yes, she's there</div>
+                    <div class="notif-btn">Not yet</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="padding: 32px 0;">
+          <p style="font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-light); margin-bottom:12px;">Arrival Check-in</p>
+          <h3 style="font-family:'DM Serif Display',serif; font-size:26px; color:var(--ink); margin-bottom:12px; line-height:1.2;">No drop-off update?<br>Kinder checks in.</h3>
+          <p style="font-size:14px; color:var(--ink-mid); line-height:1.7;">If no caregiver reports the drop-off, Kinder sends a quick check-in. Once one caregiver confirms, the other receives an update.</p>
+        </div>
+
+        <!-- partner notification -->
+        <div style="background:var(--white); border-radius:16px; border:1px solid var(--rule); padding:20px; max-width:280px;">
+          <p style="font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-light); margin-bottom:10px;">Partner receives update</p>
+          <div class="notif-card" style="background:#f0f7f0;">
+            <div class="notif-app" style="color:var(--accent-fg);">Kinder</div>
+            <div class="notif-title">Noa was dropped off</div>
+            <div class="notif-body">Sarah confirmed it at 8:12 AM.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- AUTOMATIONS -->
+  <section class="feature">
+    <div class="feature-header">
+      <div>
+        <span class="section-eyebrow">Automations</span>
+        <h2 class="section-title">Automation without the technical setup.</h2>
+      </div>
+      <div style="padding-top:60px;">
+        <p class="section-body" style="margin-bottom:16px;">Kinder hides triggers, conditions, and actions behind ready-made Time Savers written in plain language. Managers adjust the timing, audience, and approval settings without building a workflow from scratch.</p>
+        <p style="font-size:13px; color:var(--ink-light); font-style:italic;">Complex logic stays in the background. The user stays in control.</p>
+      </div>
+    </div>
+
+    <!-- automations library desktop mock -->
+    <div class="desktop-mock" style="margin-bottom:16px;">
+      <div class="desktop-topbar">
+        <div class="mock-dot red"></div>
+        <div class="mock-dot yel"></div>
+        <div class="mock-dot grn"></div>
+        <span class="mock-title">Time Savers Library</span>
+      </div>
+      <div class="desktop-content">
+        <div class="desktop-sidebar">
+          <div class="sidebar-label">Library</div>
+          <div class="sidebar-item active">All Time Savers</div>
+          <div class="sidebar-item">Attendance</div>
+          <div class="sidebar-item">Staff Updates</div>
+          <div class="sidebar-item">Parent Comms</div>
+          <div class="sidebar-item">Journals</div>
+        </div>
+        <div class="desktop-main">
+          <div class="automation-card">
+            <div class="auto-icon">⏰</div>
+            <div>
+              <div class="auto-name">Early Pickup Alert</div>
+              <div class="auto-desc">Notifies staff when a parent marks early pickup before 2 PM.</div>
+            </div>
+            <div class="auto-toggle"></div>
+          </div>
+          <div class="automation-card">
+            <div class="auto-icon">🤒</div>
+            <div>
+              <div class="auto-name">Sick Child Follow-up</div>
+              <div class="auto-desc">Sends a check-in to parents the next morning after a sick absence.</div>
+            </div>
+            <div class="auto-toggle" style="background:#ddd;"></div>
+          </div>
+          <div class="automation-card">
+            <div class="auto-icon">📋</div>
+            <div>
+              <div class="auto-name">Morning Staff Brief</div>
+              <div class="auto-desc">Prepares a daily summary of absences and changes for the lead teacher.</div>
+            </div>
+            <div class="auto-toggle"></div>
+          </div>
+          <div class="automation-card">
+            <div class="auto-icon">✍️</div>
+            <div>
+              <div class="auto-name">Smart Journal Assistant</div>
+              <div class="auto-desc">Drafts a weekly parent update from daily notes. Teacher reviews before publishing.</div>
+            </div>
+            <div class="auto-toggle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callouts">
+      <div class="callout">
+        <div class="callout-num">01</div>
+        <div class="callout-title">Ready-made templates</div>
+        <div class="callout-desc">Start with a familiar task, not a blank rule builder.</div>
+      </div>
+      <div class="callout">
+        <div class="callout-num">02</div>
+        <div class="callout-title">Plain language settings</div>
+        <div class="callout-desc">Choose when it runs and who it applies to.</div>
+      </div>
+      <div class="callout">
+        <div class="callout-num">03</div>
+        <div class="callout-title">Approval when needed</div>
+        <div class="callout-desc">Review sensitive actions before they are sent.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- STAFF UPDATES -->
+  <section class="feature">
+    <div class="feature-header">
+      <div>
+        <span class="section-eyebrow">Staff Updates</span>
+        <h2 class="section-title">Work updates, without the WhatsApp noise.</h2>
+      </div>
+      <p class="section-body" style="padding-top:60px;">Categories, priority, mentions, and read status keep staff communication clear, searchable, and focused on action.</p>
+    </div>
+
+    <div class="desktop-mock">
+      <div class="desktop-topbar">
+        <div class="mock-dot red"></div>
+        <div class="mock-dot yel"></div>
+        <div class="mock-dot grn"></div>
+        <span class="mock-title">Staff Updates</span>
+      </div>
+      <div class="desktop-content">
+        <div class="desktop-sidebar">
+          <div class="sidebar-label">Categories</div>
+          <div class="sidebar-item active">All Updates</div>
+          <div class="sidebar-item">🔴 Health</div>
+          <div class="sidebar-item">🔒 Security</div>
+          <div class="sidebar-item">📅 Schedule</div>
+          <div class="sidebar-item">💬 General</div>
+          <div class="sidebar-label" style="margin-top:16px;">Filters</div>
+          <div class="sidebar-item">⭐ Important</div>
+          <div class="sidebar-item">@ Mentioned me</div>
+        </div>
+        <div class="desktop-main">
+          <div class="update-card">
+            <div class="update-top">
+              <span class="cat-badge cat-security">Security</span>
+              <span class="priority-dot"></span>
+              <span style="font-size:11px; color:#e74c3c; font-weight:600;">Important</span>
+            </div>
+            <div class="update-text">Gate access code updated. <a href="#" style="color:var(--accent-fg);">View secure details →</a></div>
+            <div class="update-meta"><span>Seen by 4 staff members</span></div>
+          </div>
+          <div class="update-card">
+            <div class="update-top">
+              <span class="cat-badge cat-health">Health</span>
+            </div>
+            <div class="update-text">Reminder: <span class="mention">@Maya</span> please check the first aid kit before tomorrow's trip.</div>
+            <div class="update-meta"><span>Mark as Read</span><span>·</span><span>Seen by 2 staff members</span></div>
+          </div>
+          <div class="update-card">
+            <div class="update-top">
+              <span class="cat-badge cat-schedule">Schedule</span>
+            </div>
+            <div class="update-text">Thursday's outdoor session moved to the gym due to rain forecast.</div>
+            <div class="update-meta"><span>Mark as Read</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callouts">
+      <div class="callout">
+        <div class="callout-num">01</div>
+        <div class="callout-title">Categories and priority</div>
+        <div class="callout-desc">Separate the topic from the urgency.</div>
+      </div>
+      <div class="callout">
+        <div class="callout-num">02</div>
+        <div class="callout-title">Mentions</div>
+        <div class="callout-desc">Bring the right person into the update.</div>
+      </div>
+      <div class="callout">
+        <div class="callout-num">03</div>
+        <div class="callout-title">Read status</div>
+        <div class="callout-desc">Know whether the team received it.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT PROJECT -->
+  <div class="next-project">
+    <div>
+      <div class="next-label">Next project</div>
+      <div class="next-title">Coming soon</div>
+    </div>
+    <a class="btn-next" href="../index.html">← Back to all work</a>
+  </div>
+
+</body>
+</html>
